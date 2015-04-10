@@ -5,6 +5,7 @@
         var $modal = $('#modal');
 
         function modalResponse(xmldata) {
+
             var $title = $(xmldata).find('title');
             if ($title.length == 1) {
                 $modal.find('.modal-title').html($title.text());
@@ -21,25 +22,30 @@
                 $form.ajaxForm({
                     dataType: 'xml',
                     success: function(xmldata) {
+                        for (var edId in tinymce.editors) {
+                            tinymce.editors[edId].destroy();
+                            tinymce.editors[edId].remove();
+                        }
+                        tinymce.editors = [];
                         modalResponse(xmldata);
+                    },
+                    beforeSerialize: function() {
+                        win.tinymce.EditorManager.triggerSave();
                     }
                 });
 
-                $modal
-                    .off('shown.bs.modal')
-                    .on('shown.bs.modal', function() {
-                        $form.formWidget();
-                        initTinyMCE();
-                    });
-
                 $modal.find('.modal-body').html($form);
-                $modal.modal({show:true});
+
+                $form.formWidget();
+                initTinyMCE();
+
+                $modal.modal('show');
             }
 
             var $result = $(xmldata).find('result');
             if ($result.length == 1) {
                 $modal.find('.modal-body').html($result.text());
-                $modal.modal({show:true});
+                $modal.modal('show');
             }
         }
 

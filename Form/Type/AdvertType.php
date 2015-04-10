@@ -23,6 +23,7 @@ class AdvertType extends ResourceFormType
             ))
             ->add('date', 'datetime', array(
                 'label' => 'ekyna_core.field.date',
+                'format' => 'dd/MM/yyyy',
             ))
             ->add('email', 'email', array(
                 'label' => 'ekyna_core.field.email',

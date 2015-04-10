@@ -20,4 +20,4 @@ ekyna_advertisement:
         submit:
             title: Proposer une annonce
             message:
-                success: Votre annonce a bien été enregistrée.
+                success: Votre annonce a bien été enregistrée et sera publiée une fois validée par notre équipe.

@@ -14,7 +14,7 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="date" type="datetime" column="date" />
+        <field name="date" type="date" column="date" />
         <field name="title" type="string" column="title" length="255" />
         <field name="email" type="string" column="email" length="255" />
         <field name="content" type="text" column="content" />

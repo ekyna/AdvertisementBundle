@@ -51,7 +51,7 @@ class SubmitType extends AbstractType
                 'label' => 'ekyna_core.field.content',
                 'attr' => array(
                     'class' => 'tinymce',
-                    'data-theme' => 'simple',
+                    'data-theme' => 'front',
                 ),
             ))
         ;
