@@ -1,0 +1,20 @@
+ekyna_advertisement_example_index:
+    path: ""
+    defaults: { _controller: EkynaAdvertisementBundle:Example:index }
+    requirements:
+        _method: GET
+
+ekyna_advertisement_example_submit:
+    path: /submit
+    defaults: { _controller: EkynaAdvertisementBundle:Example:submit }
+    requirements:
+        _method: GET|POST
+    options:
+        expose: true
+
+ekyna_advertisement_example_detail:
+    path: /{slug}
+    defaults: { _controller: EkynaAdvertisementBundle:Example:detail }
+    requirements:
+        _method: GET
+        slug: "[a-zA-Z0-9-]+"

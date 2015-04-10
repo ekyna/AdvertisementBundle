@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                            http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Ekyna\Bundle\AdvertisementBundle\Entity\Advert"
+            repository-class="Ekyna\Bundle\AdvertisementBundle\Entity\AdvertRepository"
+            table="advert_advert">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="date" type="datetime" column="date" />
+        <field name="title" type="string" column="title" length="255" />
+        <field name="email" type="string" column="email" length="255" />
+        <field name="content" type="text" column="content" />
+        <field name="slug" column="slug" type="string" length="255" unique="true">
+            <gedmo:slug unique="true" updatable="false" fields="title" />
+        </field>
+        <field name="validated" type="boolean" column="validated" />
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create" />
+        </field>
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+            <gedmo:timestampable on="update" />
+        </field>
+
+        <one-to-one field="address" target-entity="Ekyna\Bundle\UserBundle\Model\AddressInterface">
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <join-column name="address_id" referenced-column-name="id" on-update="RESTRICT" />
+        </one-to-one>
+
+    </mapped-superclass>
+
+</doctrine-mapping>

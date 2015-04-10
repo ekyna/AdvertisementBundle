@@ -1,0 +1,20 @@
+{% extends "EkynaAdvertisementBundle:Example:base.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {{ cms_flashes() }}
+            <h1>Proposer une annonce</h1>
+            <hr>
+            <form action="{{ path('ekyna_advertisement_example_submit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {{ bootstrap_set_style('horizontal') }}
+                <div class="form-body">
+                    {{ form_widget(form) }}
+                </div>
+                {{ ui_form_footer(form) }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,3 @@
+ekyna_advertisement_admin:
+    resource: "routing/admin.yml"
+    prefix:   /admin/content

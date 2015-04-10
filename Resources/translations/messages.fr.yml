@@ -1,0 +1,23 @@
+ekyna_advertisement:
+    advert:
+        label:
+            singular: Annonce
+            plural: Annonces
+        header:
+            list: Annonces <small>Liste des annonces</small>
+            show: Détail de l'annonce
+            new: Créer une nouvelle annonce
+            edit: Modifier l'annonce
+            remove: Supprimer l'annonce
+        button:
+            list: Liste des annonces
+            show: Détail de l'annonce
+            new: Nouvelle annonce
+            edit: Modifier l'annonce
+            remove: Supprimer l'annonce
+        alert:
+            no_address: Aucune annonce configuré
+        submit:
+            title: Proposer une annonce
+            message:
+                success: Votre annonce a bien été enregistrée.

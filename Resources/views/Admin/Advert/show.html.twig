@@ -1,0 +1,53 @@
+{% extends "EkynaAdminBundle:Entity:sided.html.twig" %}
+
+{% block title %}
+<h1>{{ 'ekyna_advertisement.advert.header.show'|trans({'%name%': advert})|raw }}</h1>
+{% endblock %}
+
+{% block actions %}
+{{ admin_resource_btn(advert, 'list') }}
+{{ admin_resource_btn(advert, 'new') }}
+{% endblock %}
+
+{% block main %}
+<div class="actions">
+	{{ admin_resource_btn(advert, 'edit') }}
+	{{ admin_resource_btn(advert, 'remove') }}
+</div>
+<div class="show show-with-tabs">
+    <ul class="nav nav-tabs">
+	    <li class="active"><a href="#advertisement-advert-general" data-toggle="tab">{{ 'ekyna_core.field.general'|trans }}</a></li>
+	    <li><a href="#advertisement-advert-author" data-toggle="tab">{{ 'ekyna_core.field.author'|trans }}</a></li>
+	    <li><a href="#advertisement-advert-content" data-toggle="tab">{{ 'ekyna_core.field.content'|trans }}</a></li>
+	</ul>
+	<div class="show-body">
+	    <div class="tab-content">
+		    <div class="tab-pane active" id="advertisement-advert-general">
+		        {{ show_row(advert.title, 'text', 'ekyna_core.field.title') }}
+                <div class="row">
+                    <div class="col-md-6">
+		                {{ show_row(advert.date, 'datetime', 'ekyna_core.field.date', {'label_nb_col': 4, 'time_format': 'none'}) }}
+                    </div>
+                    <div class="col-md-6">
+		                {{ show_row(advert.validated, 'checkbox', 'ekyna_core.field.validated', {'label_nb_col': 4}) }}
+                    </div>
+                </div>
+		    </div>
+		    <div class="tab-pane" id="advertisement-advert-author">
+		        {{ show_row(advert.email, 'text', 'ekyna_core.field.email') }}
+                <div class="row show-row">
+                    <div class="col-md-2 show-label">{{ 'ekyna_core.field.address'|trans }}</div>
+                    <div class="col-md-10">
+                        <div class="show-widget show-widget-textarea">
+                            {{ render_address(advert.address) }}
+                        </div>
+                    </div>
+                </div>
+		    </div>
+		    <div class="tab-pane" id="advertisement-advert-content">
+                {{ show_row(path('ekyna_advertisement_advert_admin_tinymce', identifiers|merge({'advertId': advert.id})), 'tinymce', 'ekyna_core.field.content') }}
+		    </div>
+	    </div>
+	</div>
+</div>
+{% endblock %}

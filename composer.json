@@ -1,0 +1,34 @@
+{
+	"name" : "ekyna/advertisement-bundle",
+	"description" : "Advertisement management",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Etienne Dauvergne",
+			"homepage" : "http://ekyna.com"
+		}
+	],
+	"keywords" : [
+		"symfony2",
+		"advertisement",
+		"bundle"
+	],
+	"homepage" : "https://github.com/ekyna/AdvertisementBundle",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"php" : ">=5.4.0",
+		"ekyna/cms-bundle" : "0.1.*@dev"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Ekyna\\Bundle\\AdvertisementBundle" : ""
+		}
+	},
+	"target-dir" : "Ekyna/Bundle/AdvertisementBundle",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "0.1.x-dev"
+		}
+	}
+}

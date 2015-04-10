@@ -1,0 +1,39 @@
+{% extends "EkynaAdvertisementBundle:Example:base.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {{ cms_flashes() }}
+            <h1>{{ advert.title }}</h1>
+            <p>
+                <em>{{ advert.date|localizeddate('full', 'short') }}</em>
+            </p>
+            <div>
+                {{ advert.content|raw }}
+            </div>
+            <hr>
+            {% set link_params = {} %}
+            {% set page = app.request.query.get('page') %}
+            {% if page > 1 %}
+                {% set link_params = {'page': page} %}
+            {% endif %}
+            <p style="text-align: center">
+                <a href="{{ path('ekyna_advertisement_example_index', link_params) }}" class="btn btn-default">Retour</a>
+            </p>
+        </div>
+        <div class="col-md-4">
+            {% for a in latest %}
+            <p>
+                <a href="{{ path('ekyna_advertisement_example_detail', link_params|merge({'slug': a.slug})) }}" class="h4">{{ a.title }}</a><br>
+                <em>{{ a.date|localizeddate('full') }}</em>
+            </p>
+            <p>
+                {{ a.content|striptags|truncate(128, true, '&hellip;')|raw }}
+            </p>
+            {% if not loop.last %}<hr>{% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

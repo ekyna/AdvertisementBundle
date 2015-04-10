@@ -1,0 +1,29 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#advertisement-advert-general" data-toggle="tab">{{ 'ekyna_core.field.general'|trans }}</a></li>
+    <li><a href="#advertisement-advert-author" data-toggle="tab">{{ 'ekyna_core.field.author'|trans }}</a></li>
+    <li><a href="#advertisement-advert-content" data-toggle="tab">{{ 'ekyna_core.field.content'|trans }}</a></li>
+</ul>
+<div class="panel-body form-body">
+    {{ bootstrap_set_style('horizontal') }}
+    <div class="tab-content">
+        <div class="tab-pane active" id="advertisement-advert-general">
+            {{ form_row(form.title) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.date, {'label_col': 4, 'widget_col': 8}) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.validated, {'label_nb_col': 4}) }}
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="advertisement-advert-author">
+            {{ form_row(form.email) }}
+            {{ form_row(form.address) }}
+        </div>
+        <div class="tab-pane" id="advertisement-advert-content">
+            {{ form_row(form.content) }}
+        </div>
+    </div>
+    {{ form_rest(form) }}
+</div>
