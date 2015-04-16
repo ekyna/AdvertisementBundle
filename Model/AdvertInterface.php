@@ -2,6 +2,8 @@
 
 namespace Ekyna\Bundle\AdvertisementBundle\Model;
 
+use Ekyna\Bundle\CoreBundle\Model\TaggedEntityInterface;
+use Ekyna\Bundle\CoreBundle\Model\TimestampableInterface;
 use Ekyna\Bundle\UserBundle\Model\AddressInterface;
 
 /**
@@ -9,7 +11,7 @@ use Ekyna\Bundle\UserBundle\Model\AddressInterface;
  * @package Ekyna\Bundle\AdvertisementBundle\Model
  * @author Étienne Dauvergne <contact@ekyna.com>
  */
-interface AdvertInterface
+interface AdvertInterface extends TimestampableInterface, TaggedEntityInterface
 {
     /**
      * Get id

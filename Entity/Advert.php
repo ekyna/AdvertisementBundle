@@ -3,8 +3,7 @@
 namespace Ekyna\Bundle\AdvertisementBundle\Entity;
 
 use Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface;
-use Ekyna\Bundle\CoreBundle\Model\TimestampableInterface;
-use Ekyna\Bundle\CoreBundle\Model\TimestampableTrait;
+use Ekyna\Bundle\CoreBundle\Model as Core;
 use Ekyna\Bundle\UserBundle\Model\AddressInterface;
 
 /**
@@ -12,9 +11,10 @@ use Ekyna\Bundle\UserBundle\Model\AddressInterface;
  * @package Ekyna\Bundle\AdvertisementBundle\Entity
  * @author Étienne Dauvergne <contact@ekyna.com>
  */
-class Advert implements AdvertInterface, TimestampableInterface
+class Advert implements AdvertInterface
 {
-    use TimestampableTrait;
+    use Core\TimestampableTrait;
+    use Core\TaggedEntityTrait;
 
     /**
      * @var integer
@@ -203,5 +203,13 @@ class Advert implements AdvertInterface, TimestampableInterface
     public function getValidated()
     {
         return $this->validated;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getEntityTagPrefix()
+    {
+        return 'ekyna_advertisement.advert';
     }
 }
