@@ -28,6 +28,8 @@ class ExampleController extends Controller
             'pager' => $pager,
             'adverts'  => $pager->getCurrentPageResults(),
         ));
+
+        // TODO Shared cache
     }
 
     /**
@@ -107,5 +109,7 @@ class ExampleController extends Controller
             'advert' => $advert,
             'latest' => $latest,
         ));
+
+        // TODO Shared cache
     }
 }

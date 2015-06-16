@@ -18,7 +18,7 @@
 	],
 	"require" : {
 		"php" : ">=5.4.0",
-		"ekyna/cms-bundle" : "0.1.*@dev"
+		"ekyna/cms-bundle" : "0.3.*@dev"
 	},
 	"autoload" : {
 		"psr-0" : {
@@ -28,7 +28,7 @@
 	"target-dir" : "Ekyna/Bundle/AdvertisementBundle",
 	"extra" : {
 		"branch-alias" : {
-			"dev-master" : "0.1.x-dev"
+			"dev-master" : "0.3.x-dev"
 		}
 	}
 }
