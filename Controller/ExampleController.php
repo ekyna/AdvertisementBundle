@@ -1,6 +1,7 @@
 <?php
 
 namespace Ekyna\Bundle\AdvertisementBundle\Controller;
+use Ekyna\Bundle\AdvertisementBundle\Entity\Advert;
 use Ekyna\Bundle\CoreBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,14 +23,31 @@ class ExampleController extends Controller
     {
         $currentPage = $request->query->get('page', 1);
         $repo = $this->get('ekyna_advertisement.advert.repository');
-        $pager = $repo->createPager($currentPage, 12, true);
 
-        return $this->render('EkynaAdvertisementBundle:Example:index.html.twig', array(
+        $pager = $repo->createPager(
+            array('validated' => true),
+            array('date' => 'desc')
+        );
+        $pager
+            ->setNormalizeOutOfRangePages(true)
+            ->setMaxPerPage(12)
+            ->setCurrentPage($currentPage)
+        ;
+
+        /** @var \Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface[] $adverts */
+        $adverts = $pager->getCurrentPageResults();
+
+        $response = $this->render('EkynaAdvertisementBundle:Example:index.html.twig', array(
             'pager' => $pager,
-            'adverts'  => $pager->getCurrentPageResults(),
+            'adverts'  => $adverts,
         ));
 
-        // TODO Shared cache
+        $tags = [Advert::getEntityTagPrefix()];
+        foreach ($adverts as $a) {
+            $tags[] = $a->getEntityTag();
+        }
+
+        return $this->configureSharedCache($response, $tags);
     }
 
     /**
@@ -83,7 +101,7 @@ class ExampleController extends Controller
 
         $response = $this->render('EkynaAdvertisementBundle:Example:submit'.$format, $data);
 
-        return $response;
+        return $response->setPrivate();
     }
 
     /**
