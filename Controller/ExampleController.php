@@ -3,6 +3,7 @@
 namespace Ekyna\Bundle\AdvertisementBundle\Controller;
 use Ekyna\Bundle\AdvertisementBundle\Entity\Advert;
 use Ekyna\Bundle\CoreBundle\Controller\Controller;
+use Ekyna\Bundle\CoreBundle\Modal\Modal;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -58,48 +59,75 @@ class ExampleController extends Controller
      */
     public function submitAction(Request $request)
     {
-        $format = $request->isXmlHttpRequest() ? '.xml.twig' : '.html.twig';
+        $isXhr = $request->isXmlHttpRequest();
+
+        $modal = new Modal();
+        $modal
+            ->setType(Modal::TYPE_PRIMARY)
+            ->setButtons(array(
+                array(
+                    'id' => 'close',
+                    'label' => 'ekyna_core.button.close',
+                    'icon' => 'glyphicon glyphicon-remove',
+                    'cssClass' => 'btn-default',
+                )
+            ))
+        ;
+
+        $event = $this->get('ekyna_advertisement.advert.repository')->createNew();
+
         $cancelPath = $this->generateUrl('ekyna_advertisement_example_index');
-        $data = [];
-
-        $advert = $this->get('ekyna_advertisement.advert.repository')->createNew();
-
-        $form = $this->createForm('ekyna_advertisement_submit', $advert, array(
-            '_footer' => array(
-                'buttons' => array(
-                    'submit' => array(
-                        'theme' => 'primary',
-                        'icon'  => 'ok',
-                        'label' => 'ekyna_core.button.validate',
-                    ),
-                ),
+        $formOptions = array(
+            'action' => $this->generateUrl('ekyna_advertisement_example_submit'),
+            'method' => 'POST',
+            'attr' => array('class' => 'form-horizontal'),
+        );
+        if (!$isXhr) {
+            $formOptions['_footer'] = array(
                 'cancel_path' => $cancelPath,
-            ),
-        ));
+            );
+        }
+        $form = $this->createForm('ekyna_advertisement_submit', $event, $formOptions);
 
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $operator = $this->get('ekyna_advertisement.advert.operator');
-            $event = $operator->create($advert);
-            if (!$event->hasErrors()) {
-                if ($request->isXmlHttpRequest()) {
-                    $data['result'] = sprintf(
-                        '<div class="alert alert-success"><p>%s</p></div>',
-                        $this->getTranslator()->trans('ekyna_advertisement.advert.submit.message.success')
-                    );
-                } else {
-                    $this->addFlash('ekyna_advertisement.advert.submit.message.success', 'success');
-                    return $this->redirect($cancelPath);
-                }
+            // TODO use ResourceManager
+            $event = $this->get('ekyna_advertisement.advert.operator')->create($event);
+            if ($event->hasErrors()) {
+                $content = 'ekyna_core.error.operation_failed';
+                $type = 'danger';
+            } else {
+                $content = 'ekyna_advertisement.advert.submit.message.success';
+                $type = 'success';
             }
+            $this->addFlash($content, $type);
+
+            if ($isXhr) {
+                $modal->setContent('');
+                return $this->get('ekyna_core.modal')->render($modal);
+            }
+            return $this->redirect($cancelPath);
         }
 
-        if (empty($data)) {
-            $data['title'] = 'ekyna_advertisement.advert.submit.title';
-            $data['form'] = $form->createView();
+        if ($isXhr) {
+            $modal
+                ->setTitle('ekyna_advertisement.advert.submit.title')
+                ->setContent($form->createView())
+                ->setVars(array('form_template' => 'EkynaAdvertisementBundle:Example:submit_form.html.twig'))
+                ->addButton(array(
+                    'id'       => 'submit',
+                    'label'    => 'ekyna_core.button.save',
+                    'icon'     => 'glyphicon glyphicon-ok',
+                    'cssClass' => 'btn-success',
+                    'autospin' => true,
+                ), true)
+            ;
+            return $this->get('ekyna_core.modal')->render($modal);
         }
 
-        $response = $this->render('EkynaAdvertisementBundle:Example:submit'.$format, $data);
+        $response = $this->render('EkynaAdvertisementBundle:Example:submit.html.twig', array(
+            'form' => $form->createView(),
+        ));
 
         return $response->setPrivate();
     }

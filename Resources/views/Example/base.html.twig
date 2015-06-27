@@ -2,10 +2,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% javascripts output='js/example/advert-submit.js' filter='?yui_js'
-        '@EkynaAdvertisementBundle/Resources/asset/js/advert-submit.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {{ tinymce_init() }}
+    <script type="text/javascript">require(['bundles/ekynaadvertisement/js/advert']);</script>
 {% endblock javascripts %}
