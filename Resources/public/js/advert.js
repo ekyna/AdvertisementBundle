@@ -17,6 +17,7 @@ require(['require', 'jquery'], function(require, $) {
                     }
                     if (e.contentType == 'form') {
                         form = Form.create(e.content);
+                        form.init();
                     }
                 });
 

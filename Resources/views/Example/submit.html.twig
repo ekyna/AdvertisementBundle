@@ -9,6 +9,7 @@
             <hr>
             <form action="{{ path('ekyna_advertisement_example_submit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                 {{ bootstrap_set_style('horizontal') }}
+                {{ bootstrap_set_col_size('md') }}
                 <div class="form-body">
                     {{ form_widget(form) }}
                 </div>
