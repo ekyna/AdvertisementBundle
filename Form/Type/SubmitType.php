@@ -32,7 +32,7 @@ class SubmitType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', 'text', array(
