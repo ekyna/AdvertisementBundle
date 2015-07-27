@@ -82,12 +82,34 @@ class ExampleController extends Controller
             'method' => 'POST',
             'attr' => array('class' => 'form-horizontal'),
         );
-        if (!$isXhr) {
-            $formOptions['_footer'] = array(
-                'cancel_path' => $cancelPath,
-            );
-        }
         $form = $this->createForm('ekyna_advertisement_submit', $event, $formOptions);
+        if (!$isXhr) {
+            $form->add('actions', 'form_actions', [
+                'buttons' => [
+                    'validate' => [
+                        'type' => 'submit', 'options' => [
+                            'button_class' => 'primary',
+                            'label' => 'ekyna_core.button.validate',
+                            'attr' => [
+                                'icon' => 'ok',
+                            ],
+                        ],
+                    ],
+                    'cancel' => [
+                        'type' => 'button', 'options' => [
+                            'label' => 'ekyna_core.button.cancel',
+                            'button_class' => 'default',
+                            'as_link' => true,
+                            'attr' => [
+                                'class' => 'form-cancel-btn',
+                                'icon' => 'remove',
+                                'href' => $cancelPath,
+                            ],
+                        ],
+                    ],
+                ],
+            ]);
+        }
 
         $form->handleRequest($request);
         if ($form->isValid()) {
