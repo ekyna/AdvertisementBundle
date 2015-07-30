@@ -15,7 +15,7 @@ class AdvertType extends ResourceTableType
     /**
      * {@inheritdoc}
      */
-    public function buildTable(TableBuilderInterface $builder, array $options = array())
+    public function buildTable(TableBuilderInterface $builder, array $options)
     {
         $builder
             ->addColumn('id', 'number', array(
