@@ -5,8 +5,6 @@ namespace Ekyna\Bundle\AdvertisementBundle\Entity;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Ekyna\Bundle\AdminBundle\Doctrine\ORM\ResourceRepository;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
 
 /**
  * Class AdvertRepository
@@ -15,6 +13,34 @@ use Pagerfanta\Pagerfanta;
  */
 class AdvertRepository extends ResourceRepository
 {
+    /**
+     * Returns the front events pager.
+     *
+     * @param integer $currentPage
+     * @param integer $maxPerPage
+     * @return \Pagerfanta\Pagerfanta
+     */
+    public function createFrontPager($currentPage, $maxPerPage = 12)
+    {
+        $qb = $this->getCollectionQueryBuilder();
+
+        $query = $qb
+            ->addOrderBy('a.date', 'desc')
+            ->andWhere($qb->expr()->eq('a.validated', ':validated'))
+            ->getQuery()
+        ;
+
+        $query
+            ->setParameter('validated', true)
+        ;
+
+        return $this
+            ->getPager($query)
+            ->setMaxPerPage($maxPerPage)
+            ->setCurrentPage($currentPage)
+        ;
+    }
+
     /**
      * Finds one advert by slug.
      *

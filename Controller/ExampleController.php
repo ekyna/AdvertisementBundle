@@ -23,16 +23,10 @@ class ExampleController extends Controller
     public function indexAction(Request $request)
     {
         $currentPage = $request->query->get('page', 1);
-        $repo = $this->get('ekyna_advertisement.advert.repository');
 
-        $pager = $repo->createPager(
-            array('validated' => true),
-            array('date' => 'desc')
-        );
-        $pager
-            ->setNormalizeOutOfRangePages(true)
-            ->setMaxPerPage(12)
-            ->setCurrentPage($currentPage)
+        $pager = $this
+            ->get('ekyna_advertisement.advert.repository')
+            ->createFrontPager($currentPage, 12)
         ;
 
         /** @var \Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface[] $adverts */
