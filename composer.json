@@ -21,11 +21,10 @@
 		"ekyna/cms-bundle" : "0.3.*@dev"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"Ekyna\\Bundle\\AdvertisementBundle" : ""
+		"psr-4" : {
+			"Ekyna\\Bundle\\AdvertisementBundle\\" : ""
 		}
 	},
-	"target-dir" : "Ekyna/Bundle/AdvertisementBundle",
 	"extra" : {
 		"branch-alias" : {
 			"dev-master" : "0.3.x-dev"
