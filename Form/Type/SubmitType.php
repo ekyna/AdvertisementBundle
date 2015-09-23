@@ -4,7 +4,7 @@ namespace Ekyna\Bundle\AdvertisementBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class SubmitType
@@ -35,37 +35,37 @@ class SubmitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', 'text', array(
+            ->add('title', 'text', [
                 'label' => 'ekyna_core.field.title',
-            ))
-            ->add('email', 'email', array(
+            ])
+            ->add('email', 'email', [
                 'label' => 'ekyna_core.field.email',
-            ))
-            ->add('address', 'ekyna_user_address', array(
+            ])
+            ->add('address', 'ekyna_user_address', [
                 'label' => false,
-                'attr' => array(
+                'attr' => [
                     'widget_col' => 12,
-                )
-            ))
-            ->add('content', 'textarea', array(
+                ]
+            ])
+            ->add('content', 'textarea', [
                 'label' => 'ekyna_core.field.content',
-                'attr' => array(
+                'attr' => [
                     'class' => 'tinymce',
                     'data-theme' => 'front',
-                ),
-            ))
+                ],
+            ])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(array(
+            ->setDefaults([
                 'data_class' => $this->dataClass,
-            ))
+            ])
         ;
     }
 

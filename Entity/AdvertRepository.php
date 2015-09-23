@@ -62,10 +62,10 @@ class AdvertRepository extends ResourceRepository
 
         return $query
             ->setMaxResults(1)
-            ->setParameters(array(
+            ->setParameters([
                 'validated' => true,
                 'slug' => $slug,
-            ))
+            ])
             ->getOneOrNullResult()
         ;
     }

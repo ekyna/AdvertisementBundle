@@ -14,13 +14,6 @@ use Ekyna\Bundle\UserBundle\Model\AddressInterface;
 interface AdvertInterface extends TimestampableInterface, TaggedEntityInterface
 {
     /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
      * Set date
      *
      * @param \DateTime $date

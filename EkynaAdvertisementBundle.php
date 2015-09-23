@@ -28,8 +28,8 @@ class EkynaAdvertisementBundle extends AbstractBundle
      */
     protected function getModelInterfaces()
     {
-        return array(
+        return [
             'Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface' => 'ekyna_advertisement.advert.class',
-        );
+        ];
     }
 }

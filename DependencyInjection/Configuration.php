@@ -41,10 +41,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('advert')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('templates')->defaultValue(array(
+                                ->variableNode('templates')->defaultValue([
                                     '_form.html' => 'EkynaAdvertisementBundle:Admin/Advert:_form.html',
                                     'show.html'  => 'EkynaAdvertisementBundle:Admin/Advert:show.html',
-                                ))->end()
+                                ])->end()
                                 ->scalarNode('entity')->defaultValue('Ekyna\Bundle\AdvertisementBundle\Entity\Advert')->end()
                                 ->scalarNode('controller')->defaultValue('Ekyna\Bundle\AdvertisementBundle\Controller\Admin\AdvertController')->end()
                                 ->scalarNode('repository')->defaultValue('Ekyna\Bundle\AdvertisementBundle\Entity\AdvertRepository')->end()

@@ -1,69 +1,64 @@
 ekyna_advertisement_advert_admin_home:
     path: ""
     defaults: { _controller: "ekyna_advertisement.advert.controller:homeAction" }
-    requirements:
-        _method: GET
+    methods: [GET]
 
 ekyna_advertisement_advert_admin_list:
     path: /list
     defaults: { _controller: "ekyna_advertisement.advert.controller:listAction" }
-    requirements:
-        _method: GET|POST
+    methods: [GET, POST]
 
 ekyna_advertisement_advert_admin_new:
     path: /new
     defaults: { _controller: "ekyna_advertisement.advert.controller:newAction" }
-    requirements:
-        _method: GET|POST
+    methods: [GET, POST]
 
 ekyna_advertisement_advert_admin_show:
     path: /{advertId}/show
     defaults: { _controller: "ekyna_advertisement.advert.controller:showAction" }
+    methods: [GET]
     requirements:
-        _method: GET
         advertId: \d+
 
 ekyna_advertisement_advert_admin_edit:
     path: /{advertId}/edit
     defaults: { _controller: "ekyna_advertisement.advert.controller:editAction" }
+    methods: [GET, POST]
     requirements:
-        _method: GET|POST
         advertId: \d+
 
 ekyna_advertisement_advert_admin_tinymce:
     path: /{advertId}/tinymce
     defaults: { _controller: "ekyna_advertisement.advert.controller:tinymceAction", field: content }
+    methods: [GET]
     requirements:
-        _method: GET
         advertId: \d+
 
 ekyna_advertisement_advert_admin_toggle:
     path: /{advertId}/toggle/{field}
     defaults: { _controller: "ekyna_advertisement.advert.controller:toggleAction", field: validated }
+    methods: [GET]
     requirements:
-        _method: GET
         advertId: \d+
         field: \w+
 
 ekyna_advertisement_advert_admin_remove:
     path: /{advertId}/remove
     defaults: { _controller: "ekyna_advertisement.advert.controller:removeAction" }
+    methods: [GET, POST]
     requirements:
-        _method: GET|POST
         advertId: \d+
 
 #ekyna_advertisement_advert_admin_search:
 #    path: /search
 #    defaults: { _controller: "ekyna_advertisement.advert.controller:searchAction" }
-#    requirements:
-#        _method: GET
+#    methods: [GET]
 #    options:
 #        expose: true
 #
 #ekyna_advertisement_advert_admin_find:
 #    path: /find
 #    defaults: { _controller: "ekyna_advertisement.advert.controller:findAction" }
-#    requirements:
-#        _method: GET
+#    methods: [GET]
 #    options:
 #        expose: true

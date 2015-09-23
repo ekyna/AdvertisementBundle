@@ -32,10 +32,10 @@ class ExampleController extends Controller
         /** @var \Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface[] $adverts */
         $adverts = $pager->getCurrentPageResults();
 
-        $response = $this->render('EkynaAdvertisementBundle:Example:index.html.twig', array(
+        $response = $this->render('EkynaAdvertisementBundle:Example:index.html.twig', [
             'pager' => $pager,
             'adverts'  => $adverts,
-        ));
+        ]);
 
         $tags = [Advert::getEntityTagPrefix()];
         foreach ($adverts as $a) {
@@ -58,24 +58,24 @@ class ExampleController extends Controller
         $modal = new Modal();
         $modal
             ->setType(Modal::TYPE_PRIMARY)
-            ->setButtons(array(
-                array(
+            ->setButtons([
+                [
                     'id' => 'close',
                     'label' => 'ekyna_core.button.close',
                     'icon' => 'glyphicon glyphicon-remove',
                     'cssClass' => 'btn-default',
-                )
-            ))
+                ]
+            ])
         ;
 
         $event = $this->get('ekyna_advertisement.advert.repository')->createNew();
 
         $cancelPath = $this->generateUrl('ekyna_advertisement_example_index');
-        $formOptions = array(
+        $formOptions = [
             'action' => $this->generateUrl('ekyna_advertisement_example_submit'),
             'method' => 'POST',
-            'attr' => array('class' => 'form-horizontal'),
-        );
+            'attr' => ['class' => 'form-horizontal'],
+        ];
         $form = $this->createForm('ekyna_advertisement_submit', $event, $formOptions);
         if (!$isXhr) {
             $form->add('actions', 'form_actions', [
@@ -129,21 +129,21 @@ class ExampleController extends Controller
             $modal
                 ->setTitle('ekyna_advertisement.advert.submit.title')
                 ->setContent($form->createView())
-                ->setVars(array('form_template' => 'EkynaAdvertisementBundle:Example:submit_form.html.twig'))
-                ->addButton(array(
+                ->setVars(['form_template' => 'EkynaAdvertisementBundle:Example:submit_form.html.twig'])
+                ->addButton([
                     'id'       => 'submit',
                     'label'    => 'ekyna_core.button.save',
                     'icon'     => 'glyphicon glyphicon-ok',
                     'cssClass' => 'btn-success',
                     'autospin' => true,
-                ), true)
+                ], true)
             ;
             return $this->get('ekyna_core.modal')->render($modal);
         }
 
-        $response = $this->render('EkynaAdvertisementBundle:Example:submit.html.twig', array(
+        $response = $this->render('EkynaAdvertisementBundle:Example:submit.html.twig', [
             'form' => $form->createView(),
-        ));
+        ]);
 
         return $response->setPrivate();
     }
@@ -167,10 +167,10 @@ class ExampleController extends Controller
 
         $latest = $repo->findLatest();
 
-        return $this->render('EkynaAdvertisementBundle:Example:detail.html.twig', array(
+        return $this->render('EkynaAdvertisementBundle:Example:detail.html.twig', [
             'advert' => $advert,
             'latest' => $latest,
-        ));
+        ]);
 
         // TODO Shared cache
     }

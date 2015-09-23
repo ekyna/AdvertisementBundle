@@ -18,58 +18,58 @@ class AdvertType extends ResourceTableType
     public function buildTable(TableBuilderInterface $builder, array $options)
     {
         $builder
-            ->addColumn('id', 'number', array(
+            ->addColumn('id', 'number', [
                 'sortable' => true,
-            ))
-            ->addColumn('title', 'anchor', array(
+            ])
+            ->addColumn('title', 'anchor', [
                 'label' => 'ekyna_core.field.title',
                 'sortable' => true,
                 'route_name' => 'ekyna_advertisement_advert_admin_show',
-                'route_parameters_map' => array(
+                'route_parameters_map' => [
                     'advertId' => 'id'
-                ),
-            ))
-            ->addColumn('date', 'datetime', array(
+                ],
+            ])
+            ->addColumn('date', 'datetime', [
                 'label' => 'ekyna_core.field.date',
                 'sortable' => true,
                 'time_format' => 'none',
-            ))
-            ->addColumn('validated', 'boolean', array(
+            ])
+            ->addColumn('validated', 'boolean', [
                 'label' => 'ekyna_core.field.validated',
                 'sortable' => true,
                 'route_name' => 'ekyna_advertisement_advert_admin_toggle',
-                'route_parameters' => array('field' => 'validated'),
-                'route_parameters_map' => array('advertId' => 'id'),
-            ))
-            ->addColumn('actions', 'admin_actions', array(
-                'buttons' => array(
-                    array(
+                'route_parameters' => ['field' => 'validated'],
+                'route_parameters_map' => ['advertId' => 'id'],
+            ])
+            ->addColumn('actions', 'admin_actions', [
+                'buttons' => [
+                    [
                         'label' => 'ekyna_core.button.edit',
                         'class' => 'warning',
                         'route_name' => 'ekyna_advertisement_advert_admin_edit',
-                        'route_parameters_map' => array(
+                        'route_parameters_map' => [
                             'advertId' => 'id'
-                        ),
+                        ],
                         'permission' => 'edit',
-                    ),
-                    array(
+                    ],
+                    [
                         'label' => 'ekyna_core.button.remove',
                         'class' => 'danger',
                         'route_name' => 'ekyna_advertisement_advert_admin_remove',
-                        'route_parameters_map' => array(
+                        'route_parameters_map' => [
                             'advertId' => 'id'
-                        ),
+                        ],
                         'permission' => 'delete',
-                    ),
-                ),
-            ))
+                    ],
+                ],
+            ])
             ->addFilter('id', 'number')
-            ->addFilter('title', 'text', array(
+            ->addFilter('title', 'text', [
                 'label' => 'ekyna_core.field.title'
-            ))
-            ->addFilter('date', 'datetime', array(
+            ])
+            ->addFilter('date', 'datetime', [
                 'label' => 'ekyna_core.field.date'
-            ))
+            ])
         ;
     }
 

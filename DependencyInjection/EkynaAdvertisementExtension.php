@@ -40,8 +40,8 @@ class EkynaAdvertisementExtension extends AbstractExtension
      */
     protected function configureAsseticBundle(ContainerBuilder $container)
     {
-        $container->prependExtensionConfig('assetic', array(
-            'bundles' => array('EkynaAdvertisementBundle')
-        ));
+        $container->prependExtensionConfig('assetic', [
+            'bundles' => ['EkynaAdvertisementBundle']
+        ]);
     }
 }
