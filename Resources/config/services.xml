@@ -16,6 +16,12 @@
             <tag name="form.type" alias="ekyna_advertisement_submit" />
         </service>
 
+        <!-- Dashboard widget -->
+        <service id="ekyna_advertisement.dashboard.adverts" class="Ekyna\Bundle\AdvertisementBundle\Dashboard\AdvertsWidgetType">
+            <argument id="ekyna_advertisement.advert.repository" type="service" />
+            <tag name="ekyna_admin.dashboard.widget_type" alias="adverts" />
+        </service>
+
     </services>
 
 </container>

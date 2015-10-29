@@ -58,8 +58,9 @@ class LoadFixtureData extends AbstractFixture implements FixtureInterface, Order
                 ->setSupplement(70 < rand(0,100) ? $faker->sentence(4) : null)
                 ->setPostalCode(str_replace(' ', '' ,$faker->postcode))
                 ->setCity($faker->city)
+                ->setCountry($faker->countryCode)
                 ->setPhone($phoneUtil->parse($faker->phoneNumber, 'FR'))
-                ->setSupplement(60 < rand(0,100) ? $phoneUtil->parse($faker->phoneNumber, 'FR') : null)
+                ->setMobile(60 < rand(0,100) ? $phoneUtil->parse($faker->phoneNumber, 'FR') : null)
             ;
 
             /** @var \Ekyna\Bundle\AdvertisementBundle\Model\AdvertInterface $advert */
