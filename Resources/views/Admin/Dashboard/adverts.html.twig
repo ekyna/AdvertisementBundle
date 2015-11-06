@@ -1,0 +1,32 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'ekyna_core.field.title'|trans }}</th>
+            <th>{{ 'ekyna_core.field.email'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if adverts is not empty %}
+        {% for advert in adverts %}
+        <tr>
+            <td>
+                <a href="{{ path('ekyna_advertisement_advert_admin_show', {'advertId': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+            </td>
+            <td>
+                {{ advert.email }}
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4">
+                <p style="text-align: center;">
+                    <em>{{ 'ekyna_advertisement.advert.dashboard.none'|trans }}</em>
+                </p>
+            </td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>

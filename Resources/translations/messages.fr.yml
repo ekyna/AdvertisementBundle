@@ -21,3 +21,6 @@ ekyna_advertisement:
             title: Proposer une annonce
             message:
                 success: Votre annonce a bien été enregistrée et sera publiée une fois validée par notre équipe.
+        dashboard:
+            title: Annonces à valider
+            none: Aucune annonce à valider.

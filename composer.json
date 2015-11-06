@@ -18,16 +18,11 @@
 	],
 	"require" : {
 		"php" : ">=5.4.0",
-		"ekyna/cms-bundle" : "1.0.x-dev"
+		"ekyna/cms-bundle" : "dev-master"
 	},
 	"autoload" : {
 		"psr-4" : {
 			"Ekyna\\Bundle\\AdvertisementBundle\\" : ""
-		}
-	},
-	"extra" : {
-		"branch-alias" : {
-			"dev-master" : "1.0.x-dev"
 		}
 	}
 }

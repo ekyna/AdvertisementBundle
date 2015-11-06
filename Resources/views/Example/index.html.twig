@@ -1,45 +1,48 @@
 {% extends "EkynaAdvertisementBundle:Example:base.html.twig" %}
 
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            {{ cms_flashes() }}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
-            <a href="{{ path('ekyna_advertisement_example_submit') }}" class="btn btn-primary pull-right" data-role="advert-submit">Proposer une annonce</a>
-            <h1>{{ 'ekyna_advertisement.advert.label.plural'|trans }}</h1>
-            <hr>
+                <a href="{{ path('ekyna_advertisement_example_submit') }}" class="btn btn-primary pull-right"
+                   data-role="advert-submit">Proposer une annonce</a>
 
-            {% set nb_per_row = 3 %}
-            {% set link_params = {} %}
-            {% if pager.currentPage > 1 %}
-                {% set link_params = {'page': pager.currentPage} %}
-            {% endif %}
-            {% for a in adverts %}
-                {% if loop.index0 % nb_per_row == 0 %}<div class="row">{% endif %}
-                <div class="col-md-{{ 12 / nb_per_row }}">
-                    <p class="h4">
-                        <a href="{{ path('ekyna_advertisement_example_detail', link_params|merge({'slug': a.slug})) }}">
-                            {{ a.title }}
-                        </a>
-                    </p>
-                    <p>
-                        <em>{{ a.date|localizeddate('short', 'none') }}</em>
-                    </p>
-                    <p>
-                        {{ a.content|striptags|truncate(128, true, '&hellip;')|raw }}
-                    </p>
+                <h1>{{ 'ekyna_advertisement.advert.label.plural'|trans }}</h1>
+                <hr>
+
+                {% set nb_per_row = 3 %}
+                {% set link_params = {} %}
+                {% if pager.currentPage > 1 %}
+                    {% set link_params = {'page': pager.currentPage} %}
+                {% endif %}
+                {% for a in adverts %}
+                    {% if loop.index0 % nb_per_row == 0 %}<div class="row">{% endif %}
+                    <div class="col-md-{{ 12 / nb_per_row }}">
+                        <p class="h4">
+                            <a href="{{ path('ekyna_advertisement_example_detail', link_params|merge({'slug': a.slug})) }}">
+                                {{ a.title }}
+                            </a>
+                        </p>
+
+                        <p>
+                            <em>{{ a.date|localizeddate('short', 'none') }}</em>
+                        </p>
+
+                        <p>
+                            {{ a.content|striptags|truncate(128, true, '&hellip;')|raw }}
+                        </p>
+                    </div>
+                    {% if loop.last or loop.index % nb_per_row == 0 %}</div>{% endif %}
+                {% endfor %}
+
+                <hr>
+
+                <div style="text-align: center">
+                    {{ pagerfanta(pager, 'twitter_bootstrap3') }}
                 </div>
-                {% if loop.last or loop.index % nb_per_row == 0 %}</div>{% endif %}
-            {% endfor %}
 
-            <hr>
-
-            <div style="text-align: center">
-                {{ pagerfanta(pager, 'twitter_bootstrap3') }}
             </div>
-
         </div>
     </div>
-</div>
 {% endblock body %}
