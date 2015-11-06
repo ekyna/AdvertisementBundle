@@ -1,20 +1,20 @@
 {% extends "EkynaAdvertisementBundle:Example:base.html.twig" %}
 
-{% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            {{ cms_flashes() }}
-            <h1>Proposer une annonce</h1>
-            <hr>
-            <form action="{{ path('ekyna_advertisement_example_submit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-                {{ bootstrap_set_style('horizontal') }}
-                {{ bootstrap_set_col_size('md') }}
-                <div class="form-body">
-                    {{ form_widget(form) }}
-                </div>
-            </form>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Proposer une annonce</h1>
+                <hr>
+                <form action="{{ path('ekyna_advertisement_example_submit') }}" method="post" {{ form_enctype(form) }}
+                      class="form-horizontal">
+                    {{ bootstrap_set_style('horizontal') }}
+                    {{ bootstrap_set_col_size('md') }}
+                    <div class="form-body">
+                        {{ form_widget(form) }}
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-{% endblock body %}
+{% endblock content %}
